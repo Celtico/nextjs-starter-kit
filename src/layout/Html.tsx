@@ -1,6 +1,5 @@
 import ThemeProvider from "@/layout/components/client/ThemeProvider";
 import AuthProvider from "@/layout/components/client/AuthProvider";
-import Navigation from "@/layout/components/client/Navigation";
 import Head from "@/layout/components/Head";
 import Footer from "@/layout/components/Footer";
 import "@/layout/assets/css/globals.css";
@@ -16,7 +15,6 @@ const Html = ({ children, AuthStatusDataArray }) => (
       <Head />
       <AuthProvider>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navigation AuthStatusDataArray={AuthStatusDataArray} />
           {children}
         </ThemeProvider>
       </AuthProvider>
