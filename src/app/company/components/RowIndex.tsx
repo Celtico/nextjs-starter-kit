@@ -31,8 +31,10 @@ const RowIndex = async (props) => {
       </header>
       <main className={"backdrop-brightness-150"}>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+          <a href="/company" className={'cursor-pointer'}>
             <h1 className="text-3xl font-bold tracking-tight  text-gray-500">{title}</h1>
             <p className="mt-1 max-w-2xl text-sm text-gray-500">By {name}</p>
+          </a>
             {/* eslint-disable-next-line react/no-children-prop */}
             <ReactMarkdown children={content} />
             <div className="mt-10 flex  gap-x-6">
