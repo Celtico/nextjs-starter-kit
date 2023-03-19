@@ -8,8 +8,8 @@ import { ThemeToggle } from "@/layout/components/client/ThemeToggle";
 import { signIn, signOut } from "next-auth/react";
 
 const navigation = [
-  { name: "Index", href: "/", current: false },
-  { name: "Pages", href: "/page", current: false }
+  { name: "Company", href: "/company", current: false },
+  { name: "Products", href: "/products", current: false }
 ];
 //https://www.w3.org/TR/WD-math-970710/table06.html
 function classNames(...classes: any) {
@@ -21,7 +21,7 @@ export default function Navigation(props) {
   const pathname = usePathname();
   const session = props.AuthStatusDataArray;
   return (
-    <div className={"shadow-lg"}>
+    <div className={"shadow-lg  relative z-10"}>
       <Disclosure as="nav">
         {({ open }) => (
           <>

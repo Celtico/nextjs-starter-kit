@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import Register from "./register/components/Register";
+
 export default async function Page() {
   const AuthStatusDataArray = await getServerSession();
   return (
@@ -12,7 +13,7 @@ export default async function Page() {
         </div>
       </header>
       <main className={"backdrop-brightness-150"}>
-        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
           {AuthStatusDataArray ? "account" : <Register />}
         </div>
       </main>

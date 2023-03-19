@@ -34,7 +34,7 @@ export default function Form() {
           }
         });
       }}
-      className="flex flex-col space-y-4 px-4 py-8 sm:px-16"
+      className="mt-8 space-y-6"
     >
       <div>
         <Toaster />
