@@ -9,12 +9,16 @@ import "@/layout/assets/css/globals.css";
  * @param props
  * @constructor
  */
-const Html = ({ children, AuthStatusDataArray }) => (
+const Html = ({
+                children,
+                //AuthStatusDataArray   <Navigation AuthStatusDataArray={AuthStatusDataArray} />
+}) => (
   <html lang="es" suppressHydrationWarning>
     <body>
       <Head />
       <AuthProvider>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+
           {children}
         </ThemeProvider>
       </AuthProvider>
