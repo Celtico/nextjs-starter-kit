@@ -49,11 +49,5 @@ export default NextAuth({
     // @ts-ignore
     GoogleProvider(Google),
   ],
-  session: { strategy: "jwt" },
-  theme: {
-    colorScheme: "auto", // "auto" | "dark" | "light"
-    brandColor: "#234069", // Hex color code
-    logo: "https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500", // Absolute URL to image
-    buttonText: "#234069", // Hex color code
-  },
+  session: { strategy: "jwt" }
 });

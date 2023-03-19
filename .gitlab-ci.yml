@@ -29,5 +29,5 @@ my-init-job: # This job runs in the build stage, which runs first.
 my-ftp-job: # This job runs in the build stage, which runs first.
   stage: init
   script:
-    - lftp -e 'set ftp:ssl-allow no; mirror --only-newer --reverse --verbose ./ ./; bye' -u next,LER5CmNFH7S8CbnJ ftp.serverscel.com
+    - lftp -e 'set ftp:ssl-allow no; mirror  --exclude .git/ --only-newer --reverse --verbose ./ ./; bye' -u next,LER5CmNFH7S8CbnJ ftp.serverscel.com
   # when: manual
