@@ -1,14 +1,16 @@
 "use client";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import Image from "next/image";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { usePathname, useRouter } from "next/navigation";
-import React from "react";
 import { ThemeToggle } from "@/layout/components/client/ThemeToggle";
 import { signIn, signOut } from "next-auth/react";
 
-const navigation = [{ name: "Index", href: "/", current: false }];
+const navigation = [
+  { name: "Index", href: "/", current: false },
+  { name: "Pages", href: "/page", current: false }
+];
 //https://www.w3.org/TR/WD-math-970710/table06.html
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
