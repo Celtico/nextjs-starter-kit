@@ -30,4 +30,4 @@ my-ftp-job: # This job runs in the build stage, which runs first.
   stage: init
   script:
     - lftp -e 'set ftp:ssl-allow no; mirror --only-newer --reverse --verbose ./ ./; bye' -u next,LER5CmNFH7S8CbnJ ftp.serverscel.com
-  when: manual
+  # when: manual
