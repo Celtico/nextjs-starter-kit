@@ -14,6 +14,8 @@ model User {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
+
+  @@map(name: "user")
 }
 
 model Post {

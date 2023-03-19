@@ -9,7 +9,7 @@ const GitHub = {
   clientId: process.env.GITHUB_ID,
   clientSecret: process.env.GITHUB_SECRET,
 };
-
+// https://console.cloud.google.com/apis/credentials?hl=es-419&project=reference-fact-273509
 const Google = {
   clientId: process.env.GOOGLE_ID,
   clientSecret: process.env.GOOGLE_SECRET,
