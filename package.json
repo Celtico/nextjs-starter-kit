@@ -9,7 +9,8 @@
     "start": "next start -p 3050",
     "lint": "next lint",
     "prisma-generate": "prisma generate",
-    "prisma-studio": "npx prisma studio"
+    "prisma-studio": "npx prisma studio",
+    "deploy": "yarn && next build && next start -p 3050"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
