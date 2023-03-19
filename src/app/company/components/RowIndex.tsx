@@ -30,7 +30,7 @@ const RowIndex = async (props) => {
         </div>
       </header>
       <main className={"backdrop-brightness-150"}>
-        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl py-10 px-4 sm:py-10 sm:px-6 lg:max-w-7xl lg:px-8">
           <a href="/company" className={'cursor-pointer'}>
             <h1 className="text-3xl font-bold tracking-tight  text-gray-500">{title}</h1>
             <p className="mt-1 max-w-2xl text-sm text-gray-500">By {name}</p>

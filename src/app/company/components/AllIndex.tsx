@@ -15,7 +15,7 @@ const AllIndex = async () => {
         </div>
       </header>
       <main className={"backdrop-brightness-150"}>
-        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl py-5 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8">
             <ul>
               {all.props.all.map((post: any) => (
                 <div key={post.id} className="post">

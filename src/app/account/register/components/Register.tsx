@@ -26,7 +26,7 @@ export default function Form() {
           if (res.status === 200) {
             toast.success("Account created! Redirecting to login...");
             setTimeout(() => {
-              router.push("/account");
+              router.push("/api/auth/signin");
             }, 2000);
           } else {
             let error = await res.text();
