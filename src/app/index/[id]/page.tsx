@@ -1,12 +1,12 @@
-import AllIndex from "./index/components/AllIndex";
+import RowIndex from "../components/RowIndex";
 
 /**
  * Page
  * @constructor
  */
-const Page = () => (
+const Page = (props) => (
   /* @ts-expect-error Server Component */
-  <AllIndex />
+  <RowIndex {...props} />
 );
 
 export default Page;

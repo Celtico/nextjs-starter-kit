@@ -3,6 +3,10 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-}
+  swcMinify: true,
+  images: {
+    //domains:['tailwindui.com']
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

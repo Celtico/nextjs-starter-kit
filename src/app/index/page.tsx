@@ -1,4 +1,4 @@
-import AllIndex from "./index/components/AllIndex";
+import AllIndex from "./components/AllIndex";
 
 /**
  * Page

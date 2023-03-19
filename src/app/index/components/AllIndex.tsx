@@ -1,0 +1,32 @@
+import { All } from "./server/Select";
+import Post from "./client/Post";
+
+/**
+ * AllIndex
+ * @constructor
+ */
+const AllIndex = async () => {
+  const all = await All();
+  return (
+    <>
+      <header className="shadow-md backdrop-brightness-200">
+        <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold tracking-tight">Index</h1>
+        </div>
+      </header>
+      <main className="shadow-md">
+        <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+          <ul>
+            {all.props.all.map((post: any) => (
+              <div key={post.id} className="post">
+                <Post post={post} />
+              </div>
+            ))}
+          </ul>
+        </div>
+      </main>
+    </>
+  );
+};
+
+export default AllIndex;
