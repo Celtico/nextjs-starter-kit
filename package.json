@@ -10,7 +10,7 @@
     "lint": "next lint",
     "prisma-generate": "prisma generate",
     "prisma-studio": "npx prisma studio",
-    "deploy": "rm -rf .vscode && rm -rf .next && next build && next start -p 3060"
+    "deploy": "rm -rf .vscode && rm -rf .next && yarn && next build && NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
@@ -25,6 +25,7 @@
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "next": "13.2.4",
+    "next-absolute-url": "^1.2.2",
     "next-auth": "^4.20.1",
     "next-themes": "^0.2.1",
     "prisma": "^4.11.0",
