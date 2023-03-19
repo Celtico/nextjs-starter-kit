@@ -4,14 +4,11 @@ import { hash } from "bcrypt";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const { email, password } = req.body;
-  const exists = await prisma.user.findUnique({
-    where: {
-      email,
-    },
-  });
+  const where = { email };
+  const exists = await prisma.user.findUnique({ where });
   if (exists) {
     res.status(400).send("User already exists");
   } else {
