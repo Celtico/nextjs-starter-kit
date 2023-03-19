@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 .idea
-
+.vscode
 
 # testing
 /coverage
@@ -25,6 +25,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+yarn.lock
 .pnpm-debug.log*
 
 # local env files
