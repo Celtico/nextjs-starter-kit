@@ -5,12 +5,13 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { usePathname, useRouter } from "next/navigation";
 import { ThemeToggle } from "@/layout/components/client/ThemeToggle";
-import { signIn, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 const navigation = [
   { name: "Company", href: "/company", current: false },
-  { name: "Products", href: "/products", current: false }
+  { name: "Products", href: "/products", current: false },
 ];
+
 //https://www.w3.org/TR/WD-math-970710/table06.html
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -59,7 +60,7 @@ export default function Navigation(props) {
                             pathname !== item.href
                               ? "text-opacity-50 hover:text-opacity-70 hover:text-opacity-80"
                               : "backdrop-brightness-50 text-white",
-                            "rounded-md px-3 py-2 text-sm font-medium"
+                            "rounded-md px-3 py-2 text-sm font-medium",
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
@@ -70,12 +71,14 @@ export default function Navigation(props) {
                   </div>
                 </div>
                 <div className="hidden md:block">
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <div
+                    className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <ThemeToggle />
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-3">
                       <div>
-                        <Menu.Button className="flex rounded-full  text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <Menu.Button
+                          className="flex rounded-full  text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -101,53 +104,55 @@ export default function Navigation(props) {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="/account"
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
-                                )}
-                              >
-                                {session && session.user && session.user.name
-                                  ? session.user.name
-                                  : session &&
-                                    session.user &&
-                                    session.user.email
-                                  ? session.user.email
-                                  : "Register"}
-                              </a>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) =>
-                              session ? (
-                                <a
-                                  href="#"
-                                  className={classNames(
-                                    active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
+                        <Menu.Items
+                          className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          {
+                            session ?
+                              <>
+                                <Menu.Item>
+                                  <a
+                                    href="/account"
+                                    className={"block px-4 py-2 text-sm text-gray-700"}
+                                  >
+                                    {session && session.user && session.user.name
+                                      ? session.user.name
+                                      : session && session.user && session.user.email
+                                        ? session.user.email
+                                        : null}
+                                  </a>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => session && (
+                                    <a
+                                      href="#"
+                                      className={"block px-4 py-2 text-sm text-gray-700"}
+                                      onClick={() => signOut()}
+                                    >
+                                      Logout
+                                    </a>
                                   )}
-                                  onClick={() => signOut()}
-                                >
-                                  Sign Out &rarr;
-                                </a>
-                              ) : (
-                                <a
-                                  href="#"
-                                  className={classNames(
-                                    active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
-                                  )}
-                                  onClick={() => signIn()}
-                                >
-                                  Sign In &rarr;
-                                </a>
-                              )
-                            }
-                          </Menu.Item>
+                                </Menu.Item>
+                              </>
+                              :
+                              <>
+                                <Menu.Item>
+                                  <a
+                                    href="/account/login"
+                                    className={"block px-4 py-2 text-sm text-gray-700"}
+                                  >
+                                    Login
+                                  </a>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <a
+                                    href="/account/register"
+                                    className={"block px-4 py-2 text-sm text-gray-700"}
+                                  >
+                                    Register
+                                  </a>
+                                </Menu.Item>
+                              </>
+                          }
                         </Menu.Items>
                       </Transition>
                     </Menu>
@@ -155,7 +160,8 @@ export default function Navigation(props) {
                 </div>
                 <div className="-mr-2 flex md:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                  <Disclosure.Button
+                    className="inline-flex items-center justify-center rounded-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -177,7 +183,7 @@ export default function Navigation(props) {
                       item.current
                         ? "bg-gray-900 text-white"
                         : "hover:bg-gray-700 hover:text-white",
-                      "block rounded-md px-3 py-2 text-base font-medium"
+                      "block rounded-md px-3 py-2 text-base font-medium",
                     )}
                     aria-current={item.current ? "page" : undefined}
                   >
@@ -188,59 +194,61 @@ export default function Navigation(props) {
               <div className="border-t border-gray-700 pt-4 pb-3">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">
-                    <div className="flex-shrink-0">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                      </svg>
-                    </div>
-                    <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">
-                        {session && session.user && session.user.name
-                          ? session.user.name
-                          : session && session.user && session.user.email
-                          ? session.user.email
-                          : null}
-                      </div>
-                      <div className="text-sm font-medium leading-none text-gray-400">
-                        {session && session.user && session.user.name
-                          ? session.user.name
-                          : session && session.user && session.user.email
-                          ? session.user.email
-                          : null}
-                      </div>
-                    </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                    { session ?
+                        <>
+                          <a
+                            href="/account"
+                            className={"block px-4 py-2 text-sm text-gray-500"}
+                          >
+                            {session && session.user && session.user.name
+                              ? session.user.name
+                              : session && session.user && session.user.email
+                                ? session.user.email
+                                : null}
+                          </a>
+                          <a
+                            href="#"
+                            className={"block px-4 py-2 text-sm text-gray-500"}
+                            onClick={() => signOut()}
+                          >
+                            Logout
+                          </a>
+                        </>
+                        :
+                        <>
+                          <a
+                            href="/account/login"
+                            className={"block px-4 py-2 text-sm text-gray-500"}
+                          >
+                            Login
+                          </a>
+                          <a
+                            href="/account/register"
+                            className={"block px-4 py-2 text-sm text-gray-500"}
+                          >
+                            Register
+                          </a>
+                        </>
+                    }
                   </div>
-                  <div className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                  <div
+                    className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                     <ThemeToggle />
                   </div>
-                </div>
-                <div className="mt-3 space-y-1 px-2">
-                  {session ? (
-                    <Disclosure.Button
-                      className="block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-700 hover:text-white"
-                      onClick={() => signOut()}
-                    >
-                      Sign Out &rarr;
-                    </Disclosure.Button>
-                  ) : (
-                    <Disclosure.Button
-                      className="block rounded-md px-3 py-2 text-base font-medium  hover:bg-gray-700 hover:text-white"
-                      onClick={() => signIn()}
-                    >
-                      Sign In &rarr;
-                    </Disclosure.Button>
-                  )}
                 </div>
               </div>
             </Disclosure.Panel>

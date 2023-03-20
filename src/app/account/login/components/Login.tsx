@@ -3,14 +3,14 @@ import { useState } from "react";
 import LoadingDots from "./LoadingDots";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { register } from "../server/register";
+import { login } from "../server/login";
 import Link from "next/link";
 
 /**
  * Form
  * @constructor
  */
-export default function Register() {
+export default function Login() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   return (
@@ -18,7 +18,7 @@ export default function Register() {
       onSubmit={(e) => {
         e.preventDefault();
         setLoading(true);
-        register({e,setLoading,router})
+        login({e,setLoading,router})
       }}
       className="mt-8 space-y-6"
     >
@@ -69,19 +69,18 @@ export default function Register() {
 
         {loading
           ? <LoadingDots color="#808080" />
-          : <p>Register</p>
+          : <p>LogIn</p>
         }
 
       </button>
 
       <p className="text-center text-sm text-gray-500">
         Don&apos;t have an account?{" "}
-        <Link href="/account/login" className="font-semibold text-gray-600">
-          Login
+        <Link href="/account/register" className="font-semibold text-gray-600">
+          Register
         </Link>{" "}
         for free.
       </p>
-
 
     </form>
   );
