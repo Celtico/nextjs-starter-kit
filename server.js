@@ -3,7 +3,6 @@ const { createServer } = require('http');
 const next = require('next');
 const absoluteUrl = require('next-absolute-url').default;
 const { parse } = require('url');
-
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();

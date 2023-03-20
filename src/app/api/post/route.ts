@@ -1,6 +1,5 @@
 export async function GET(request: Request, context: { params }) {
   const team = context.params.team; // '1'
-
   return new Response("Hello, Next.js!");
 }
 
