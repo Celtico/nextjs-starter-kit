@@ -2,8 +2,7 @@ import { getServerSession } from "next-auth/next";
 import Post from "../components/Post";
 import prisma from "../../../../../lib/prisma";
 
-export async function DraftSProps() {
-  const session = await getServerSession();
+async function allPost(session) {
   if (!session) {
     return { props: { drafts: [] } };
   } else if (session && session.user && session.user.email) {
@@ -30,8 +29,8 @@ export async function DraftSProps() {
 
 
 const Drafts = async () => {
-  const all = await DraftSProps();
   const session = await getServerSession();
+  const all = await allPost(session);
   if (!session) {
     return (
       <>
@@ -51,6 +50,7 @@ const Drafts = async () => {
       </>
     );
   }
+
   return (
     <>
       <header className="shadow-md backdrop-brightness-200">

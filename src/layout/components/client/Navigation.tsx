@@ -6,6 +6,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { usePathname, useRouter } from "next/navigation";
 import { ThemeToggle } from "@/layout/components/client/ThemeToggle";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 const navigation = [
   { name: "Company", href: "/company", current: false },
@@ -30,7 +31,7 @@ export default function Navigation(props) {
               <div className="flex h-16 items-center justify-between">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <a
+                    <Link
                       onClick={(event) => {
                         event.preventDefault();
                         router.push("/");
@@ -44,12 +45,12 @@ export default function Navigation(props) {
                         width={100}
                         height={100}
                       />
-                    </a>
+                    </Link>
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           onClick={(event) => {
                             event.preventDefault();
                             router.push(item.href);
@@ -65,7 +66,7 @@ export default function Navigation(props) {
                           aria-current={item.current ? "page" : undefined}
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -110,7 +111,7 @@ export default function Navigation(props) {
                             session ?
                               <>
                                 <Menu.Item>
-                                  <a
+                                  <Link
                                     href="/account"
                                     className={"block px-4 py-2 text-sm text-gray-700"}
                                   >
@@ -119,69 +120,69 @@ export default function Navigation(props) {
                                       : session && session.user && session.user.email
                                         ? session.user.email
                                         : null}
-                                  </a>
+                                  </Link>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <a
+                                  <Link
                                     href="/account/drafts/all"
                                     className={"block px-4 py-2 text-sm text-gray-700"}
                                   >
                                    All Posts
-                                  </a>
+                                  </Link>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <a
+                                  <Link
                                     href="/account/drafts"
                                     className={"block px-4 py-2 text-sm text-gray-700"}
                                   >
                                     Drafts
-                                  </a>
+                                  </Link>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <a
+                                  <Link
                                     href="/account/drafts/create"
                                     className={"block px-4 py-2 text-sm text-gray-700"}
                                   >
                                     Create
-                                  </a>
+                                  </Link>
                                 </Menu.Item>
                                 <Menu.Item>
                                   {({ active }) => session && (
-                                    <a
+                                    <Link
                                       href="#"
                                       className={"block px-4 py-2 text-sm text-gray-700"}
                                       onClick={() => signOut()}
                                     >
                                       Logout
-                                    </a>
+                                    </Link>
                                   )}
                                 </Menu.Item>
                               </>
                               :
                               <>
                                 <Menu.Item>
-                                  <a
+                                  <Link
                                     href="/account/login"
                                     className={"block px-4 py-2 text-sm text-gray-700"}
                                   >
                                     Login
-                                  </a>
+                                  </Link>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <a
+                                  <Link
                                     href="/api/auth/signin"
                                     className={"block px-4 py-2 text-sm text-gray-700"}
                                   >
                                     Login Providers
-                                  </a>
+                                  </Link>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <a
+                                  <Link
                                     href="/account/register"
                                     className={"block px-4 py-2 text-sm text-gray-700"}
                                   >
                                     Register
-                                  </a>
+                                  </Link>
                                 </Menu.Item>
                               </>
                           }
@@ -242,7 +243,7 @@ export default function Navigation(props) {
                     </svg>
                     {session ?
                       <>
-                        <a
+                        <Link
                           href="/account"
                           className={"block px-4 py-2 text-sm text-gray-500"}
                         >
@@ -251,41 +252,41 @@ export default function Navigation(props) {
                             : session && session.user && session.user.email
                               ? session.user.email
                               : null}
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                           href="/account/drafts/all"
                           className={"block px-4 py-2 text-sm text-gray-500"}
                         >
                           All Posts
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                           href="/account/drafts"
                           className={"block px-4 py-2 text-sm text-gray-500"}
                         >
                           Drafts
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                           href="/account/drafts/create"
                           className={"block px-4 py-2 text-sm text-gray-500"}
                         >
                           Create
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                           href="#"
                           className={"block px-4 py-2 text-sm text-gray-500"}
                           onClick={() => signOut()}
                         >
                           Logout
-                        </a>
+                        </Link>
                       </>
                       :
                       <>
-                        <a
+                        <Link
                           href="/account/login"
                           className={"block px-4 py-2 text-sm text-gray-500"}
                         >
                           Login
-                        </a>
+                        </Link>
                         <a
                           href="/account/register"
                           className={"block px-4 py-2 text-sm text-gray-500"}
