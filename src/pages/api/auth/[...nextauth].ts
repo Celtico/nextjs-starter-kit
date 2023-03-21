@@ -51,22 +51,7 @@ export const authOptions = {
     // @ts-ignore
     GoogleProvider(Google),
   ],
-  callbacks: {
-    async session({session, token, user}) {
-      session.user.role = user.role; // Add role value to user object so it is passed along with session
-      return session;
-    },
-    async jwt({token}) {
-      token.userRole = "admin"
-      return token
-    },
-    async signIn({ account, profile }) {
-      if (account.provider === "google") {
-        return profile.email_verified && profile.email.endsWith("@gmail.com")
-      }
-      return true // Do different verification for other providers that don't have `email_verified`
-    },
-  },
+
   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
   debug: true,
@@ -76,3 +61,22 @@ export const authOptions = {
 // @ts-ignore
 const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, authOptions);
 export default authHandler;
+
+/**
+ * callbacks: {
+ *     async session({session, token, user}) {
+ *       session.user.role = user.role; // Add role value to user object so it is passed along with session
+ *       return session;
+ *     },
+ *     async jwt({token}) {
+ *       token.userRole = "admin"
+ *       return token
+ *     },
+ *     async signIn({ account, profile }) {
+ *       if (account.provider === "google") {
+ *         return profile.email_verified && profile.email.endsWith("@gmail.com")
+ *       }
+ *       return true // Do different verification for other providers that don't have `email_verified`
+ *     },
+ *   },
+ */
