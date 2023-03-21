@@ -122,6 +122,30 @@ export default function Navigation(props) {
                                   </a>
                                 </Menu.Item>
                                 <Menu.Item>
+                                  <a
+                                    href="/account/drafts/all"
+                                    className={"block px-4 py-2 text-sm text-gray-700"}
+                                  >
+                                   All Posts
+                                  </a>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <a
+                                    href="/account/drafts"
+                                    className={"block px-4 py-2 text-sm text-gray-700"}
+                                  >
+                                    Drafts
+                                  </a>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <a
+                                    href="/account/drafts/create"
+                                    className={"block px-4 py-2 text-sm text-gray-700"}
+                                  >
+                                    Create
+                                  </a>
+                                </Menu.Item>
+                                <Menu.Item>
                                   {({ active }) => session && (
                                     <a
                                       href="#"
@@ -141,6 +165,14 @@ export default function Navigation(props) {
                                     className={"block px-4 py-2 text-sm text-gray-700"}
                                   >
                                     Login
+                                  </a>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <a
+                                    href="/api/auth/signin"
+                                    className={"block px-4 py-2 text-sm text-gray-700"}
+                                  >
+                                    Login Providers
                                   </a>
                                 </Menu.Item>
                                 <Menu.Item>
@@ -208,41 +240,59 @@ export default function Navigation(props) {
                         d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
                       />
                     </svg>
-                    { session ?
-                        <>
-                          <a
-                            href="/account"
-                            className={"block px-4 py-2 text-sm text-gray-500"}
-                          >
-                            {session && session.user && session.user.name
-                              ? session.user.name
-                              : session && session.user && session.user.email
-                                ? session.user.email
-                                : null}
-                          </a>
-                          <a
-                            href="#"
-                            className={"block px-4 py-2 text-sm text-gray-500"}
-                            onClick={() => signOut()}
-                          >
-                            Logout
-                          </a>
-                        </>
-                        :
-                        <>
-                          <a
-                            href="/account/login"
-                            className={"block px-4 py-2 text-sm text-gray-500"}
-                          >
-                            Login
-                          </a>
-                          <a
-                            href="/account/register"
-                            className={"block px-4 py-2 text-sm text-gray-500"}
-                          >
-                            Register
-                          </a>
-                        </>
+                    {session ?
+                      <>
+                        <a
+                          href="/account"
+                          className={"block px-4 py-2 text-sm text-gray-500"}
+                        >
+                          {session && session.user && session.user.name
+                            ? session.user.name
+                            : session && session.user && session.user.email
+                              ? session.user.email
+                              : null}
+                        </a>
+                        <a
+                          href="/account/drafts/all"
+                          className={"block px-4 py-2 text-sm text-gray-500"}
+                        >
+                          All Posts
+                        </a>
+                        <a
+                          href="/account/drafts"
+                          className={"block px-4 py-2 text-sm text-gray-500"}
+                        >
+                          Drafts
+                        </a>
+                        <a
+                          href="/account/drafts/create"
+                          className={"block px-4 py-2 text-sm text-gray-500"}
+                        >
+                          Create
+                        </a>
+                        <a
+                          href="#"
+                          className={"block px-4 py-2 text-sm text-gray-500"}
+                          onClick={() => signOut()}
+                        >
+                          Logout
+                        </a>
+                      </>
+                      :
+                      <>
+                        <a
+                          href="/account/login"
+                          className={"block px-4 py-2 text-sm text-gray-500"}
+                        >
+                          Login
+                        </a>
+                        <a
+                          href="/account/register"
+                          className={"block px-4 py-2 text-sm text-gray-500"}
+                        >
+                          Register
+                        </a>
+                      </>
                     }
                   </div>
                   <div

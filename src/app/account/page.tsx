@@ -13,7 +13,8 @@ export default async function Page() {
       </header>
       <main className={"backdrop-brightness-150"}>
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-          {AuthStatusDataArray ? <pre>{JSON.stringify(AuthStatusDataArray,null,2)}</pre> :  '·······'}
+          {AuthStatusDataArray ?
+            <pre>{JSON.stringify(AuthStatusDataArray,null,2)}</pre> :  '·······'}
         </div>
       </main>
     </>

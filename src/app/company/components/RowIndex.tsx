@@ -1,5 +1,8 @@
 import ReactMarkdown from "react-markdown";
 import { Row } from "../components/server/Select";
+import EditPost from "./actions/edit-post";
+import React from "react";
+import { getServerSession } from "next-auth/next";
 
 /**
  * Page
@@ -22,6 +25,7 @@ const RowIndex = async (props) => {
     name = String(row.props.row.author.name);
     content = String(row.props.row.content);
   }
+  const session = await getServerSession();
   return (
     <>
       <header className="shadow-md backdrop-brightness-200">
@@ -37,14 +41,8 @@ const RowIndex = async (props) => {
           </a>
             {/* eslint-disable-next-line react/no-children-prop */}
             <ReactMarkdown children={content} />
-            <div className="mt-10 flex  gap-x-6">
-              <a
-                href="/company"
-                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-600"
-              >
-                Back
-              </a>
-            </div>
+            {/* eslint-disable-next-line react/no-children-prop */}
+            <EditPost post={row.props.row} session={session}/>
         </div>
       </main>
     </>

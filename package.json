@@ -33,6 +33,7 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.0",
     "react-markdown": "^8.0.5",
+    "tailwindcss-markdown": "^1.0.1",
     "typescript": "5.0.2"
   },
   "devDependencies": {
