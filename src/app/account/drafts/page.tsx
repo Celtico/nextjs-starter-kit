@@ -3,15 +3,6 @@ import React from "react";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import Post from "./components/Post";
-import { GetStaticPaths } from "next";
-
-
-const  getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
-  return {
-    paths: [], //indicates that no page needs be created at build time
-    fallback: true //indicates the type of fallback
-  }
-}
 
 
 async function allPost(session) {

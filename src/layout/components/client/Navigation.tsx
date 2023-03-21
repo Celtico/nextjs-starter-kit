@@ -9,7 +9,7 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 const navigation = [
-  { name: "Company", href: "/company", current: false },
+  { name: "Company", href: "/", current: false },
   { name: "Products", href: "/products", current: false },
 ];
 
