@@ -1,6 +1,6 @@
 import ReactMarkdown from "react-markdown";
 import { Row } from "../components/server/Select";
-import EditPost from "./actions/edit-post";
+import EditPost from "../../account/drafts/components/EditPost";
 import React from "react";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../../pages/api/auth/[...nextauth]";
