@@ -17,6 +17,7 @@ export default  function Page() {
       console.error(error);
     }
   };
+  
   return (
     <>
       <header className="shadow-md backdrop-brightness-200">
