@@ -5,6 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { NextApiHandler } from "next";
 
 const GitHub = {
   clientId: process.env.GITHUB_ID,
@@ -52,11 +53,11 @@ export const authOptions = {
   ],
   callbacks: {
     async session({session, token, user}) {
-      //session.user.role = user.role; // Add role value to user object so it is passed along with session
+      session.user.role = user.role; // Add role value to user object so it is passed along with session
       return session;
     },
     async jwt({token}) {
-      // token.userRole = "admin"
+      token.userRole = "admin"
       return token
     },
     async signIn({ account, profile }) {
@@ -68,7 +69,7 @@ export const authOptions = {
   },
   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
-  debug: false,
+  debug: true,
   session: { strategy: "jwt" }
 }
 
