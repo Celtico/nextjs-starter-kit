@@ -20,8 +20,8 @@ export default  function Page() {
       })
       toast.success('Crate Post');
       setTimeout(()=>{
-        router.push("/account/drafts")
-      },500)
+        window.location.href = "/account/drafts";
+      },1000)
     } catch (error) {
       console.error(error);
     }

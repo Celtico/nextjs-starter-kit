@@ -7,17 +7,16 @@ const publishPost = async (id,router) => {
   await fetch(`/api/publish/${id}`, { method: "PUT"});
   toast.success('publishPost');
   setTimeout(()=>{
-    router.push("/account/drafts/all")
-  },500)
-
+    window.location.href = "/account/drafts/all";
+  },1000)
 }
 
 const  deletePost = async (id, router) => {
   await fetch(`/api/post/${id}`, { method: "DELETE"});
   toast.success('deletePost');
   setTimeout(()=>{
-    router.push("/account/drafts/all")
-  },500)
+    window.location.href = "/account/drafts/all";
+  },1000)
 }
 
 
