@@ -4,6 +4,7 @@ import { compare } from "bcrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 const GitHub = {
   clientId: process.env.GITHUB_ID,
@@ -49,7 +50,28 @@ export const authOptions = {
     // @ts-ignore
     GoogleProvider(Google),
   ],
- // session: { strategy: "jwt" }
+  callbacks: {
+    async session({session, token, user}) {
+      //session.user.role = user.role; // Add role value to user object so it is passed along with session
+      return session;
+    },
+    async jwt({token}) {
+      // token.userRole = "admin"
+      return token
+    },
+    async signIn({ account, profile }) {
+      if (account.provider === "google") {
+        return profile.email_verified && profile.email.endsWith("@gmail.com")
+      }
+      return true // Do different verification for other providers that don't have `email_verified`
+    },
+  },
+  adapter: PrismaAdapter(prisma),
+  secret: process.env.SECRET,
+  debug: false,
+  session: { strategy: "jwt" }
 }
 
-export default NextAuth(authOptions);
+// @ts-ignore
+const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, authOptions);
+export default authHandler;

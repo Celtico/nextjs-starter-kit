@@ -30,6 +30,7 @@ async function allPost(session) {
 
 
 const Drafts = async () => {
+  // @ts-ignore
   const session = await getServerSession(authOptions);
   const all = await allPost(session);
   if (!session) {

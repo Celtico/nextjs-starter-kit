@@ -6,7 +6,7 @@
     "rm": "rm -rf .vscode && rm -rf .next",
     "dev": "next dev -p 3050",
     "build": "next build",
-    "start-local": "next start -p 3050",
+    "start-local": "next build && next start -p 3050",
     "start": "NODE_ENV=production node server.js",
     "lint": "next lint",
     "prisma-generate": "prisma generate",

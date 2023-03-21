@@ -3,6 +3,7 @@ import Register from "./components/Register";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 export default async function Page() {
+  // @ts-ignore
   const ServerSession = await getServerSession(authOptions);
   return (
     <>

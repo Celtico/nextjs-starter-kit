@@ -9,6 +9,7 @@ import React from "react";
  * @constructor
  */
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
+  // @ts-ignore
   const AuthStatusDataArray = await getServerSession(authOptions);
   return <Html AuthStatusDataArray={AuthStatusDataArray}>{children}</Html>;
 };

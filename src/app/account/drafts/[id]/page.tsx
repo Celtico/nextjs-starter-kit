@@ -18,6 +18,8 @@ const RowEdit = async (props) => {
   });
 };
 const Page = async (props) => {
+
+  // @ts-ignore
   const session = await getServerSession(authOptions);
   const post = await RowEdit(props);
   let title = "", name = "Unknown author", content = "";

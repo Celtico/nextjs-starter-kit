@@ -2,6 +2,18 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
+import { GetStaticPaths } from "next";
+
+
+export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
+
+  return {
+    paths: [], //indicates that no page needs be created at build time
+    fallback: true //indicates the type of fallback
+  }
+}
+
+
 
 const publishPost = async ({id,router}) => {
   await fetch(`/api/publish/${id}`, { method: "PUT"}).then(e=>{
@@ -38,7 +50,7 @@ export const Create = async ({body,router}) => {
       router.push("/account/drafts")
     },2000)
   }).catch(e=>{
-    console.log(e)
+    console.log('catchError',e)
   });
 }
 
