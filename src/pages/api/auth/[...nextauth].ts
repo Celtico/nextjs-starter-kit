@@ -55,7 +55,7 @@ export const authOptions = {
   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
   debug: true,
-  session: { strategy: "jwt" }
+  // session: { strategy: "jwt" }
 }
 
 // @ts-ignore
