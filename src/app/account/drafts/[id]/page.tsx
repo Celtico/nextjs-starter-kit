@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth/next";
 import ReactMarkdown from "react-markdown";
 import prisma from "../../../../../lib/prisma";
 import EditPost from "../components/EditPost";
+import { authOptions } from "../../../../pages/api/auth/[...nextauth]";
 
 const RowEdit = async (props) => {
   return prisma.post.findUnique({
@@ -17,7 +18,7 @@ const RowEdit = async (props) => {
   });
 };
 const Page = async (props) => {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   const post = await RowEdit(props);
   let title = "", name = "Unknown author", content = "";
   if (

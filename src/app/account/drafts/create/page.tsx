@@ -21,7 +21,7 @@ export default  function Page() {
       toast.success('Crate Post');
       setTimeout(()=>{
         window.location.href = "/account/drafts";
-      },1000)
+      },2000)
     } catch (error) {
       console.error(error);
     }

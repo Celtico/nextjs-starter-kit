@@ -3,6 +3,7 @@ import { Row } from "../components/server/Select";
 import EditPost from "./actions/edit-post";
 import React from "react";
 import { getServerSession } from "next-auth/next";
+import { authOptions } from "../../../pages/api/auth/[...nextauth]";
 
 /**
  * Page
@@ -25,7 +26,7 @@ const RowIndex = async (props) => {
     name = String(row.props.row.author.name);
     content = String(row.props.row.content);
   }
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   return (
     <>
       <header className="shadow-md backdrop-brightness-200">

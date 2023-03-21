@@ -1,4 +1,5 @@
 import Html from "@/layout/Html";
+import { authOptions } from "../pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth/next";
 import React from "react";
 
@@ -8,7 +9,7 @@ import React from "react";
  * @constructor
  */
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
-  const AuthStatusDataArray = await getServerSession();
+  const AuthStatusDataArray = await getServerSession(authOptions);
   return <Html AuthStatusDataArray={AuthStatusDataArray}>{children}</Html>;
 };
 

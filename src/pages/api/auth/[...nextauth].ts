@@ -15,7 +15,7 @@ const Google = {
   clientSecret: process.env.GOOGLE_SECRET,
 };
 
-export default NextAuth({
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -49,5 +49,7 @@ export default NextAuth({
     // @ts-ignore
     GoogleProvider(Google),
   ],
-  session: { strategy: "jwt" }
-});
+ // session: { strategy: "jwt" }
+}
+
+export default NextAuth(authOptions);

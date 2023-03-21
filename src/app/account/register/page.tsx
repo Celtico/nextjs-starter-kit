@@ -1,8 +1,9 @@
 import { getServerSession } from "next-auth/next";
 import Register from "./components/Register";
+import { authOptions } from "../../../pages/api/auth/[...nextauth]";
 
 export default async function Page() {
-  const AuthStatusDataArray = await getServerSession();
+  const AuthStatusDataArray = await getServerSession(authOptions);
   return (
     <>
       <header className="shadow-md backdrop-brightness-200">

@@ -1,27 +1,25 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
-const publishPost = async (id,router) => {
+const publishPost = async (id) => {
   await fetch(`/api/publish/${id}`, { method: "PUT"});
   toast.success('publishPost');
   setTimeout(()=>{
     window.location.href = "/account/drafts/all";
-  },1000)
+  },2000)
 }
 
-const  deletePost = async (id, router) => {
+const  deletePost = async (id) => {
   await fetch(`/api/post/${id}`, { method: "DELETE"});
   toast.success('deletePost');
   setTimeout(()=>{
     window.location.href = "/account/drafts/all";
-  },1000)
+  },2000)
 }
 
 
 const EditPost = ({ post, session }) => {
-  const router = useRouter();
   const userHasValidSession = Boolean(session);
   const postBelongsToUser = session?.user?.email === post.author?.email;
   return (
@@ -35,7 +33,7 @@ const EditPost = ({ post, session }) => {
                   focus-visible:outline focus-visible:outline-2
                   focus-visible:outline-indigo-600
                   "
-          onClick={() => publishPost(post.id,router)}
+          onClick={() => publishPost(post.id)}
         >Publish</button>
       )}
       {userHasValidSession && postBelongsToUser && (
@@ -46,7 +44,7 @@ const EditPost = ({ post, session }) => {
                   focus-visible:outline focus-visible:outline-2
                   focus-visible:outline-indigo-600
                   "
-          onClick={() => deletePost(post.id,router)}
+          onClick={() => deletePost(post.id)}
         >Delete</button>
       )}
       <a

@@ -23,5 +23,5 @@ app.prepare().then(() => createServer((req, res) => {
   return handle(req, res, parsedUrl);
 }).listen(3060, (err) => {
   if (err) throw err;
-  console.log('> Sever is running!');
+  console.log('> Sever is running! on 3060');
 }));
