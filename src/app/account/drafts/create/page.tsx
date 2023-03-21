@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import toast, { Toaster } from "react-hot-toast";
+import { Create } from "../components/EditPost";
 
 export default  function Page() {
   const [title, setTitle] = useState('');
@@ -11,17 +12,7 @@ export default  function Page() {
     e.preventDefault();
     try {
       const body = { title, content };
-      await fetch(`/api/post`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      })
-      toast.success('Crate Post');
-      setTimeout(()=>{
-        window.location.href = "/account/drafts";
-      },2000)
+      await Create({ body, router })
     } catch (error) {
       console.error(error);
     }

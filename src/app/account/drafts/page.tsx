@@ -1,7 +1,7 @@
 import prisma from "../../../../lib/prisma";
 import React from "react";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../../pages/api/auth/[...nextauth]";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import Post from "./components/Post";
 
 async function allPost(session) {
