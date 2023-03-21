@@ -10,6 +10,7 @@
     "lint": "next lint",
     "prisma-generate": "prisma generate",
     "prisma-studio": "npx prisma studio",
+    "deploy-local": "rm -rf .vscode && rm -rf .next && yarn && next build && next start -p 3050",
     "deploy": "rm -rf .vscode && rm -rf .next && yarn && next build && NODE_ENV=production node server.js"
   },
   "dependencies": {
