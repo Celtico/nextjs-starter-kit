@@ -8,6 +8,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
   const postId = req.query.id;
   // @ts-ignore
   const session = await getServerSession(req, res, authOptions)
+  console.log('session 2',session)
   if (req.method === "DELETE") {
     if (session) {
       const post = await prisma.post.delete({

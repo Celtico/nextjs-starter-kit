@@ -19,7 +19,7 @@ const publishPost = async ({ id, router }) => {
     if (e.status === 200) {
       toast.success("publishPost");
       setTimeout(() => {
-        router.push("/account/drafts/all");
+        router.push("/account/drafts");
       }, 2000);
     } else {
       toast.error("publishPost");
@@ -35,7 +35,7 @@ const deletePost = async ({ id, router }) => {
     if (e.status === 200) {
       toast.success("deletePost");
       setTimeout(() => {
-        router.push("/account/drafts/all");
+        router.push("/account/drafts");
       }, 2000);
     } else {
       toast.error("deletePost");
