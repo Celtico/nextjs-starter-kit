@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import { GetStaticPaths } from "next";
 
-
 export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
   return {
     paths: [], //indicates that no page needs be created at build time
@@ -12,10 +11,13 @@ export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
   };
 };
 
-
+/**
+ * publishPost
+ * @param id
+ * @param router
+ */
 const publishPost = async ({ id, router }) => {
   await fetch(`/api/publish/${id}`, { method: "PUT" }).then(e => {
-    console.log(e.status);
     if (e.status === 200) {
       toast.success("publishPost");
       setTimeout(() => {
@@ -25,13 +27,17 @@ const publishPost = async ({ id, router }) => {
       toast.error("publishPost");
     }
   }).catch(e => {
-    console.log(e);
+    console.log("catchError", e);
   });
 };
 
+/**
+ * deletePost
+ * @param id
+ * @param router
+ */
 const deletePost = async ({ id, router }) => {
   fetch(`/api/post/${id}`, { method: "DELETE" }).then(e => {
-    console.log(e.status);
     if (e.status === 200) {
       toast.success("deletePost");
       setTimeout(() => {
@@ -41,21 +47,27 @@ const deletePost = async ({ id, router }) => {
       toast.error("deletePost");
     }
   }).catch(e => {
-    console.log(e);
+    console.log("catchError", e);
   });
 };
 
+
+/**
+ * CreatePost
+ * @param body
+ * @param router
+ * @constructor
+ */
 export const CreatePost = async ({ body, router }) => {
   fetch(`/api/post`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   }).then(e => {
-    console.log(e.status);
     if (e.status === 200) {
       toast.success("CratePost");
       setTimeout(() => {
-        router.push("/account/drafts");
+        window.location.href = "/account/drafts"
       }, 2000);
     } else {
       toast.error("CratePost");
