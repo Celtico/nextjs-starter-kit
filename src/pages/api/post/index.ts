@@ -8,6 +8,7 @@ import prisma from "../../../../lib/prisma";
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
   const { title, content } = req.body;
   const session = await getSession({ req });
+  console.log(session)
   if (session  && session.user  && session.user.email) {
     const result = await prisma.post.create({
       data: {

@@ -2,22 +2,23 @@
 import React, { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Create } from "../components/EditPost";
+import { CreatePost } from "../components/EditPost";
 
-export default  function Page() {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+const Page =  (props) => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  // @ts-ignore
   const router = useRouter();
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
       const body = { title, content };
-      await Create({ body, router })
+      await CreatePost({ body, router});
     } catch (error) {
       console.error(error);
     }
   };
-  
+
   return (
     <>
       <header className="shadow-md backdrop-brightness-200">
@@ -66,4 +67,7 @@ export default  function Page() {
       </main>
     </>
   );
-}
+};
+
+
+export default Page;

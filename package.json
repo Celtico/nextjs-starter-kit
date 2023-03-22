@@ -5,9 +5,6 @@
   "scripts": {
     "rm": "rm -rf .vscode && rm -rf .next",
     "dev": "next dev -p 3050",
-    "build": "next build",
-    "start-local": "next build && next start -p 3050",
-    "start": "NODE_ENV=production node server.js",
     "lint": "next lint",
     "prisma-generate": "prisma generate",
     "prisma-studio": "npx prisma studio",
@@ -26,6 +23,7 @@
     "bcrypt": "^5.1.0",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
+    "jsonwebtoken": "^9.0.0",
     "next": "13.2.4",
     "next-absolute-url": "^1.2.2",
     "next-auth": "^4.20.1",
