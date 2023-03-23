@@ -6,11 +6,13 @@
     "rm": "rm -rf .vscode && rm -rf .next",
     "dev": "next dev -p 3050",
     "lint": "next lint",
-    "prisma-generate": "prisma generate",
-    "prisma-studio": "npx prisma studio",
-    "yarn": "yarn",
+    "yarn-install": "yarn",
     "deploy-local": "next build && next start -p 3050",
-    "deploy": "next build && NODE_ENV=production node server.js"
+    "deploy": "next build && NODE_ENV=production node server.js",
+    "prisma-migrate": "npx prisma migrate dev",
+    "prisma-deploy": "npx prisma migrate deploy",
+    "prisma-generate": "prisma generate",
+    "prisma-studio": "npx prisma studio"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
@@ -22,9 +24,9 @@
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
-    "jsonwebtoken": "^9.0.0",
     "next": "13.2.4",
     "next-absolute-url": "^1.2.2",
     "next-auth": "^4.20.1",
@@ -34,8 +36,6 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.0",
     "react-markdown": "^8.0.5",
-    "sharp": "^0.31.3",
-    "tailwindcss-markdown": "^1.0.1",
     "typescript": "5.0.2"
   },
   "devDependencies": {

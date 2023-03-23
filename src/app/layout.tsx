@@ -1,5 +1,5 @@
-import Html from "@/layout/Html";
-import { authOptions } from "../pages/api/auth/[...nextauth]";
+import Html from "@/modules/Application/layout/Html";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth/next";
 import React from "react";
 

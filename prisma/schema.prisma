@@ -1,20 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
-  @@map(name: "user")
+generator client {
+  provider = "prisma-client-js"
 }
 
 model Post {
@@ -22,7 +12,7 @@ model Post {
   title     String
   content   String?
   published Boolean @default(false)
-  author    Users?  @relation(fields: [authorId], references: [id])
+  author    User?   @relation(fields: [authorId], references: [id])
   authorId  String?
 }
 
@@ -42,7 +32,7 @@ model Account {
   oauth_token_secret String?
   oauth_token        String?
 
-  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@map("accounts")
@@ -53,22 +43,26 @@ model Session {
   sessionToken String   @unique @map("session_token")
   userId       String   @map("user_id")
   expires      DateTime
-  user         Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }
 
-model Users {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
-  image         String?
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  posts         Post[]
-  accounts      Account[]
-  sessions      Session[]
+model User {
+  id                String             @id @default(cuid())
+  name              String?
+  email             String?            @unique
+  emailVerified     DateTime?          @map("email_verified")
+  image             String?
+  encryptedPassword String?
+  createdAt         DateTime           @default(now()) @map(name: "created_at")
+  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
+  posts             Post[]
+  accounts          Account[]
+  sessions          Session[]
+  accessTokens      OauthAccessToken[]
+  accessGrants      OauthAccessGrant[]
+  identities        UserIdentity[]
 
   @@map(name: "users")
 }
@@ -80,4 +74,70 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verificationtokens")
+}
+
+model OauthAccessToken {
+  id                    String           @id @default(dbgenerated())
+  userId                String
+  applicationId         String
+  token                 String           @unique
+  refreshToken          String?          @unique
+  tokenExpiresAt        DateTime?        @db.Timestamp(6)
+  refreshTokenExpiresAt DateTime?        @db.Timestamp(6)
+  scopes                Json             @default("[]")
+  createdAt             DateTime         @default(now()) @db.Timestamp(6)
+  updatedAt             DateTime         @default(now()) @updatedAt @db.Timestamp(6)
+  application           OauthApplication @relation(fields: [applicationId], references: [id])
+  user                  User             @relation(fields: [userId], references: [id])
+
+  @@index([applicationId])
+  @@index([userId])
+}
+
+model OauthAccessGrant {
+  id                  String           @id @default(dbgenerated())
+  userId              String
+  applicationId       String
+  token               String           @unique
+  expiresAt           DateTime         @db.Timestamp(6)
+  redirectUri         String
+  codeChallengeMethod String?
+  codeChallenge       String?
+  scopes              Json             @default("[]")
+  createdAt           DateTime         @default(now()) @db.Timestamp(6)
+  updatedAt           DateTime         @default(now()) @updatedAt @db.Timestamp(6)
+  application         OauthApplication @relation(fields: [applicationId], references: [id])
+  user                User             @relation(fields: [userId], references: [id])
+
+  @@index([applicationId])
+  @@index([userId])
+}
+
+model OauthApplication {
+  id           String             @id @default(dbgenerated())
+  name         String
+  clientId     String             @unique
+  clientSecret String
+  redirectUris Json               @default("[]")
+  scopes       Json               @default("[]")
+  createdAt    DateTime           @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime           @default(now()) @updatedAt @db.Timestamp(6)
+  grants       Json               @default("[]")
+  accessTokens OauthAccessToken[]
+  accessGrants OauthAccessGrant[]
+}
+
+model UserIdentity {
+  id        String   @id @default(dbgenerated())
+  userId    String
+  provider  String
+  uid       String
+  name      String?
+  email     String?
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([provider, uid])
+  @@index([userId])
 }

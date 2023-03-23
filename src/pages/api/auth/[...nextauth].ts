@@ -4,9 +4,8 @@ import { compare } from "bcrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextApiHandler } from "next";
-import jwt from "jsonwebtoken";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 const GitHub = {
   clientId: process.env.GITHUB_ID,
@@ -35,16 +34,19 @@ export const authOptions = {
         if (!email || !password) {
           throw new Error("Missing username or password");
         }
-        const user = await prisma.user.findUnique({
-          where: {
-            email,
-          },
-        });
-        // if user doesn't exist or password doesn't match
-        if (!user || !(await compare(password, user.password))) {
-          throw new Error("Invalid username or password");
+        if (email) {
+          const user = await prisma.user.findUnique({
+            where: {
+              // @ts-ignore
+              email,
+            },
+          });
+          // if user doesn't exist or password doesn't match
+          if (!user || !(await compare(password, user.encryptedPassword))) {
+            throw new Error("Invalid username or password");
+          }
+          return user;
         }
-        return user;
       },
     }),
     // @ts-ignore
@@ -53,36 +55,21 @@ export const authOptions = {
     GoogleProvider(Google),
   ],
   callbacks: {
-    async session({session, token, user}) {
+    async session({ session }) {
       return session;
     },
-    async jwt({token}) {
-      return token
-    },
-    async signIn({ account, profile }) {
-      if (account.provider === "google") {
-        return profile.email_verified && profile.email.endsWith("@gmail.com")
-      }
-      return true // Do different verification for other providers that don't have `email_verified`
-    },
-  },
-  jwt: {
-    async encode({ secret, token }) {
-      return jwt.sign(token, secret)
-    },
-    async decode({ secret, token }) {
-      return jwt.verify(token, secret)
+    async redirect({ url, baseUrl }) {
+     // console.log({ url, baseUrl })
+      return baseUrl
     },
   },
   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
   debug: true,
-  // useSecureCookies: true,
   session: {
-    strategy: "jwt"
-  }
-}
-
+    strategy: "jwt",
+  },
+};
 // @ts-ignore
 const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, authOptions);
 export default authHandler;

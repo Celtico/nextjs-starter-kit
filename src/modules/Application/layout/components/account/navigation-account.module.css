@@ -1,0 +1,10 @@
+.NavigationAccount  {
+ float: right;
+ position: relative;
+}
+
+.ThemeToggle  {
+ float: right;
+ margin-top: 3px;
+ margin-left: 10px;
+}
